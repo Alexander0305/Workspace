@@ -117,6 +117,7 @@ const ADMIN_TABS = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
   { id: 'features', label: 'Feature Flags', icon: Flag },
   { id: 'ai-rules', label: 'AI Rules', icon: Brain },
+  { id: 'ai-config', label: 'AI Config', icon: Sparkles },
   { id: 'files', label: 'Files', icon: Code },
   { id: 'users', label: 'Users & Access', icon: Users },
   { id: 'tiers', label: 'Tiers', icon: Crown },

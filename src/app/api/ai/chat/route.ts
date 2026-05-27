@@ -10,8 +10,11 @@ interface ChatRequestBody {
   model?: string
   conversationId?: string
   personality?: string
-  messages?: Array<{ role: string; content: string }>
+  messages?: Array<{ role: 'user' | 'assistant' | 'system'; content: string }>
 }
+
+type ChatRole = 'user' | 'assistant' | 'system'
+type ChatMessage = { role: ChatRole; content: string }
 
 /**
  * Resolve the API key to use for a provider.
@@ -147,7 +150,7 @@ async function routeToProvider(
   apiKey: string | null,
   baseUrl: string | null,
   model: string | undefined,
-  messages: Array<{ role: string; content: string }>,
+  messages: ChatMessage[],
   systemPrompt: string
 ): Promise<{ content: string; tokensUsed: number; model: string }> {
   const provider = getProviderById(providerId)
@@ -410,7 +413,7 @@ export async function POST(request: NextRequest) {
     const keyResolution = await resolveApiKey(user.id, user.tier, providerId)
 
     // Build messages array
-    const messages = body.messages || [{ role: 'user', content: message }]
+    const messages: ChatMessage[] = body.messages || [{ role: 'user' as const, content: message }]
 
     // Build system prompt with user context and rules
     const systemPrompt = await buildSystemPrompt(personality, {

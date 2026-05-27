@@ -180,7 +180,7 @@ export function NotesView() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => handleDelete(selectedNoteId)}
+                    onClick={() => selectedNoteId && handleDelete(selectedNoteId)}
                     className={`p-1.5 rounded-lg transition-colors ${
                       deleteConfirmId === selectedNoteId ? 'text-destructive bg-destructive/10' : 'text-muted-foreground hover:text-destructive hover:bg-destructive/10'
                     }`}
@@ -197,7 +197,7 @@ export function NotesView() {
                 >
                   <p className="text-[10px] text-destructive mb-1">Delete this note?</p>
                   <div className="flex gap-2">
-                    <button onClick={() => { deleteNote(selectedNoteId); setSelectedNoteId(notes.find(n => n.id !== selectedNoteId)?.id || null); setDeleteConfirmId(null) }} className="text-[10px] px-2 py-0.5 rounded bg-destructive text-destructive-foreground">Yes, delete</button>
+                    <button onClick={() => { if (selectedNoteId) { deleteNote(selectedNoteId); setSelectedNoteId(notes.find(n => n.id !== selectedNoteId)?.id || null); } setDeleteConfirmId(null) }} className="text-[10px] px-2 py-0.5 rounded bg-destructive text-destructive-foreground">Yes, delete</button>
                     <button onClick={() => setDeleteConfirmId(null)} className="text-[10px] px-2 py-0.5 rounded border border-border text-muted-foreground">Cancel</button>
                   </div>
                 </motion.div>

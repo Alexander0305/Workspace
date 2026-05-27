@@ -3,6 +3,8 @@ import { reasonThroughQuery, type QueryContext } from '@/lib/reasoning-engine'
 import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 
+type ChatRole = 'user' | 'assistant' | 'system'
+
 const THINKING_TEMPLATES = [
   'Analyzing the query structure and identifying key intent patterns...',
   'Cross-referencing with knowledge base entries and contextual data...',
@@ -63,7 +65,7 @@ export async function POST(request: NextRequest) {
         tags: e.tags || [],
         category: e.category || '',
       })),
-      recentMessages: messages.slice(-5).map((m: { role: string; content: string }) => ({ role: m.role, content: m.content })),
+      recentMessages: messages.slice(-5).map((m: { role: string; content: string }) => ({ role: m.role as ChatRole, content: m.content })),
       userPreferences: userPreferences || [],
       reasoningDepth: reasoningDepth || 'balanced',
     }

@@ -22,6 +22,14 @@ const VIEW_TITLES: Record<NovaView, string> = {
   code: 'Code Playground',
   calculator: 'Calculator',
   settings: 'Settings',
+  admin: 'Admin Panel',
+  websearch: 'Web Search',
+  imagegen: 'Image Generation',
+  videogen: 'Video Generation',
+  promptenhancer: 'Prompt Enhancer',
+  templates: 'Prompt Templates',
+  aiproviders: 'AI Providers',
+  integrations: 'Integrations',
 }
 
 export function Topbar() {
